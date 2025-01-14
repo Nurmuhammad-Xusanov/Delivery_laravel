@@ -45,6 +45,7 @@ class WorkersController extends Controller
             'number' => $request->number,
             'password' => Hash::make($request->password),
         ]);
+    
         $role = Role::findOrFail($request->role);
         $user->assignRole($role);
         return redirect()->route('workers.index')->with('success', 'User created successfully!');

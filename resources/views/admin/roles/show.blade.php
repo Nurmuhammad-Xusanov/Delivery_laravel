@@ -11,11 +11,29 @@
     <div class="py-10">
         <div class="max-w-7xl mx-auto px-6 lg:px-8 space-y-5 bg-gray-800 rounded py-2">
             <ul class="">
+                <h1 class="text-white">Permissions:</h1>
                 @foreach ($role->permissions as $permission)
-                    <li class="text-white">{{ $loop->iteration }}. {{ ucfirst($permission->name) }}
+                    <li class="text-white px-2">• {{ ucfirst($permission->name) }}
                     <li>
                 @endforeach
             </ul>
+            <div class="max-w-7xl mx-auto  space-y-5">
+                @foreach ($users as $user)
+                    <div class="flex justify-between items-center border-b border-gray-700">
+                        <h1 id={{ $user->id }} class="text-white">{{ ucfirst($user->name) }}</h1>
+                        <div class="flex gap-1 items-center">
+                            <a class="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm sm:px-5 sm:py-2.5 py-1 px-2 text-center me-2 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800"
+                                href={{ route('role.edit', $user->id) }}>Edit</a>
+                            <form action="{{ route('role.destroy', $user->id) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit"
+                                    class="text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm sm:px-5 sm:py-2.5 py-1 px-2 text-center me-2 mb-2 dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 dark:focus:ring-red-900">Delete</button>
+                            </form>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
             <div class="flex flex-col justify-end">
                 <p class="text-gray-300 text-xs"><span class="text-cyan-500">Created at:</span>
                     {{ $role->created_at->format('Y-m-d H:i') }}</p>

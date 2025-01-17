@@ -49,8 +49,11 @@ class RoleController extends Controller
     public function show(string $id)
     {
         $role = Role::findOrFail($id);
-        $users = User::whereHas($role->name);
-        return view('admin.roles.show', compact('role', 'user'));
+        $users = User::whereHas('roles', function ($q) use ($id) {
+            $q->where('roles.id', $id);
+        })->get();
+
+        return view('admin.roles.show', compact('role', 'users'));
     }
 
     /**

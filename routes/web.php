@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\FoodsController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\WorkersController;
@@ -19,6 +20,7 @@ Route::prefix('admin')->middleware(['auth'])->group(function () {
         Route::resource('role', RoleController::class);
         Route::resource('workers', WorkersController::class);
     });
+    Route::resource('foods', FoodsController::class);
     Route::middleware(['auth'])->group(function () {
         Route::get('profile', [ProfileController::class, 'edit'])->name('profile.edit');
         Route::patch('profile', [ProfileController::class, 'update'])->name('profile.update');

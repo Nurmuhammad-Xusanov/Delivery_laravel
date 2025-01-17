@@ -8,7 +8,7 @@
         </div>
     </x-slot>
     <div class="py-12">
-        <div class="max-w-7xl mx-auto px-6 lg:px-8 space-y-5">
+        <div class="max-w-7xl mx-auto space-y-5">
             <div class="relative overflow-x-auto">
                 <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                     <tbody>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
@@ -48,7 +49,8 @@ class RoleController extends Controller
     public function show(string $id)
     {
         $role = Role::findOrFail($id);
-        return view('admin.roles.show', compact('role'));
+        $users = User::whereHas($role->name);
+        return view('admin.roles.show', compact('role', 'user'));
     }
 
     /**
@@ -66,7 +68,7 @@ class RoleController extends Controller
      */
     public function update(Request $request, Role $role)
     {
-      
+
         $request->validate([
             'name' => 'required|unique:roles,name,' . $role->id,
             'permissions' => 'required|array',

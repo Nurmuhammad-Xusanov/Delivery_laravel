@@ -3,7 +3,7 @@
         <div class="flex justify-between">
             <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
                 <a href={{ route('role.index') }}><i class="fa-solid fa-chevron-left"></i></a>
-                {{ __('Role create') }}
+                {{ __('Role edit') }}
             </h2>
         </div>
     </x-slot>

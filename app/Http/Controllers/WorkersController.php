@@ -45,7 +45,7 @@ class WorkersController extends Controller
             'number' => $request->number,
             'password' => Hash::make($request->password),
         ]);
-    
+
         $role = Role::findOrFail($request->role);
         $user->assignRole($role);
         return redirect()->route('workers.index')->with('success', 'User created successfully!');
@@ -56,7 +56,8 @@ class WorkersController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $user = User::findOrFail($id);
+        return view('admin.workers.show', compact('user'));
     }
 
     /**
@@ -64,15 +65,39 @@ class WorkersController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $roles = Role::all();
+        $user = User::findOrFail($id);
+        return view('admin.workers.edit', compact('user', 'roles'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'name' => 'string|required|max:30',
+            'email' => 'string|required|email|unique:users,email,' . $id,
+            'number' => 'string|required',
+            'password' => 'nullable|string|min:8',
+            'role' => 'string|required',
+        ]);
+
+        $user = User::findOrFail($id);
+
+
+        $user->update([
+            'name' => $request->name,
+            'email' => $request->email,
+            'number' => $request->number,
+            'password' => $request->password ? Hash::make($request->password) : $user->password,
+        ]);
+
+
+        $role = Role::findByName($request->role);
+        $user->syncRoles([$role->name]);
+
+        return redirect()->route('workers.index')->with('success', 'User updated successfully!');
     }
 
     /**

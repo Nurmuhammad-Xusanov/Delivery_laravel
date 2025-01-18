@@ -16,6 +16,11 @@
                         {{ __('Dashboard') }}
                     </x-nav-link>
                 </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('foods.index')" :active="request()->routeIs('foods.index')">
+                        {{ __('Foods') }}
+                    </x-nav-link>
+                </div>
                 @hasrole('admin')
                     <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                         <x-nav-link :href="route('role.index')" :active="request()->routeIs('role.index')">
@@ -28,6 +33,7 @@
                         </x-nav-link>
                     </div>
                 @endhasrole
+                
             </div>
 
             <!-- Settings Dropdown -->
@@ -91,6 +97,11 @@
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
         </div>
+        <div class="pt-2 pb-3 space-y-1">
+            <x-responsive-nav-link :href="route('foods.index')" :active="request()->routeIs('foods.index')">
+                {{ __('Foods') }}
+            </x-responsive-nav-link>
+        </div>
         @hasrole('admin')
             <div class="pt-2 pb-3 space-y-1">
                 <x-responsive-nav-link :href="route('role.index')" :active="request()->routeIs('role.index')">
@@ -101,7 +112,7 @@
                 <x-responsive-nav-link :href="route('workers.index')" :active="request()->routeIs('workers.index')">
                     {{ __('Workers') }}
                 </x-responsive-nav-link>
-            </div>x
+            </div>
         @endhasrole
         <!-- Responsive Settings Options -->
         <div class="pt-4 pb-1 border-t border-gray-200 dark:border-gray-600">

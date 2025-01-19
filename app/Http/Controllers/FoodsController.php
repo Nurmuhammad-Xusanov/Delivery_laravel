@@ -21,7 +21,7 @@ class FoodsController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.foods.create');
     }
 
     /**
@@ -29,7 +29,21 @@ class FoodsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'title' => 'required|string|max:15',
+            'description' => 'required|string',
+            'image' => 'required|file|max:5120',
+        ]);
+        $image = $request->file('image');
+        $imageName = '/images/foods/' . time() . '.' . $image->getClientOriginalExtension();
+        $image->move(public_path('images/foods'), $imageName);
+
+        Foods::create([
+            'title' => $request->title,
+            'description' => $request->description,
+            'image' => $imageName,
+        ]);
+        return redirect()->route('foods.index')->with('success', 'Food Created Successfully!');
     }
 
     /**
@@ -59,8 +73,9 @@ class FoodsController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Foods $food)
     {
-        //
+        $food->delete();
+        return redirect()->route('foods.index')->with('success', 'Food Deleted Successfully!');
     }
 }

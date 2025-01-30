@@ -37,13 +37,13 @@
                                     </a>
 
                                     <!-- Edit Button (Hidden on small screens) -->
-                                    <a class="hidden sm:inline" href="{{ route('foods.edit', $food->id) }}"
-                                        class="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800">
+                                    <a href="{{ route('foods.edit', $food->id) }}"
+                                        class="text-blue-700 hidden sm:inline hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800">
                                         Edit
                                     </a>
 
                                     <!-- Delete Form (Hidden on small screens) -->
-                                    <form class="hidden sm:inline" action="{{ route('foods.destroy', $food->id) }}"
+                                    <form class="hidden sm:block" action="{{ route('foods.destroy', $food->id) }}"
                                         method="POST">
                                         @csrf
                                         @method('DELETE')

@@ -31,7 +31,7 @@ class FoodsController extends Controller
     {
         $request->validate([
             'title' => 'required|string|max:15',
-            'description' => 'required|string',
+            'description' => 'required',
             'image' => 'required|file|max:5120',
         ]);
         $image = $request->file('image');
@@ -49,9 +49,9 @@ class FoodsController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Foods $food)
     {
-        //
+        return view('admin.foods.show', compact('food'));
     }
 
     /**

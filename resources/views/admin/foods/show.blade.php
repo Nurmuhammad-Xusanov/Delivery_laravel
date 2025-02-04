@@ -10,20 +10,22 @@
     <div class="py-10">
         <div class="max-w-7xl mx-auto px-6 lg:px-8 space-y-5 bg-gray-800 rounded py-2">
 
-            <div class="flex flex-col lg:flex-row items-center lg:items-stretch space-y-4 lg:space-y-0 lg:space-x-4">
-                <!-- Image Section -->
-                <div class="w-full lg:w-1/3 flex-shrink-0">
-                    <img class="w-full h-full object-cover rounded" src="{{$food->image}}" alt="{{$food->title}}">
+            <div
+                class="flex flex-col lg:flex-row items-stretch lg:items-start space-y-4 lg:space-y-0 lg:space-x-4">
+                <div>
+                    <img class="max-h-72 rounded " src="{{$food->image}}" alt="{{$food->title}}">
                 </div>
-
                 <!-- Description Section -->
                 <div class="flex flex-col gap-2 w-full lg:w-2/3">
                     <h1 class="text-white text-lg font-bold text-center lg:text-left">{{$food->title}}</h1>
                     <div class="flex-1 overflow-y-auto">
-                        <p class="text-white">{{$food->description}}</p>
+                        
                     </div>
                 </div>
             </div>
+
+
+
 
             <div class="max-w-7xl mx-auto space-y-5">
                 <div class="flex justify-between items-center border-b border-gray-700">

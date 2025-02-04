@@ -32,6 +32,7 @@ class FoodsController extends Controller
         $request->validate([
             'title' => 'required|string|max:15',
             'description' => 'required',
+            'price' => 'required|decimal:3',
             'image' => 'required|file|max:5120',
         ]);
         $image = $request->file('image');
@@ -41,6 +42,7 @@ class FoodsController extends Controller
         Foods::create([
             'title' => $request->title,
             'description' => $request->description,
+            'price' => $request->price,
             'image' => $imageName,
         ]);
         return redirect()->route('foods.index')->with('success', 'Food Created Successfully!');

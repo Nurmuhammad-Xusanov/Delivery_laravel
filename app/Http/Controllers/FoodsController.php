@@ -32,9 +32,10 @@ class FoodsController extends Controller
         $request->validate([
             'title' => 'required|string|max:15',
             'description' => 'required',
-            'price' => 'required|decimal:3',
+            'price' => 'required|numeric',
             'image' => 'required|file|max:5120',
         ]);
+
         $image = $request->file('image');
         $imageName = '/images/foods/' . time() . '.' . $image->getClientOriginalExtension();
         $image->move(public_path('images/foods'), $imageName);
@@ -42,11 +43,13 @@ class FoodsController extends Controller
         Foods::create([
             'title' => $request->title,
             'description' => $request->description,
-            'price' => $request->price,
+            'price' => number_format((float) $request->price, 3, '.', ''), 
             'image' => $imageName,
         ]);
+
         return redirect()->route('foods.index')->with('success', 'Food Created Successfully!');
     }
+
 
     /**
      * Display the specified resource.
@@ -61,7 +64,8 @@ class FoodsController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $food = Foods::findOrFail($id);
+        return view('admin.foods.edit', compact('food'));
     }
 
     /**

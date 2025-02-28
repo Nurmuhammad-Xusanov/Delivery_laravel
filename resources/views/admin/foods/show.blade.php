@@ -17,22 +17,27 @@
                 </a>
 
                 <h1 class="text-white text-lg font-bold">{{$food->title}}</h1>
-                <p class="text-white">{{$food->description}}</p>
+                <p class="text-gray-400">{{$food->description}}</p>
+
             </div>
 
             <div
                 class="fixed bottom-0 left-1/2 transform -translate-x-1/2 w-full max-w-7xl mx-auto px-6 lg:px-8 bg-gray-800">
                 <div class="w-full pt-2 flex justify-between items-center">
                     <div class="flex flex-col justify-end">
+                        <p class="text-white inline sm:hidden">{{$food->price}} <span class="text-blue-300">so'm</span>
                         <p class="text-gray-300 text-xs"><span class="text-cyan-500">Created at:</span>
                             {{ $food->created_at->format('Y-m-d H:i') }}</p>
                         <p class="text-gray-300 text-xs"><span class="text-cyan-500">Updated at:</span>
                             {{ $food->updated_at->format('Y-m-d H:i') }}</p>
+                        </p>
                     </div>
+                    <p class="text-white hidden sm:inline">{{$food->price}} <span class="text-blue-300">so'm</span></p>
                     <div class="flex justify-end ">
                         <div class="flex gap-1 items-center">
                             <a class="text-blue-700 hover:text-white border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm sm:px-5 sm:py-2.5 py-1 px-2 text-center me-2 mb-2 dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:hover:bg-blue-500 dark:focus:ring-blue-800"
                                 href={{ route('foods.edit', $food->id) }}>Edit</a>
+
                             <form action="{{ route('foods.destroy', $food->id) }}" method="POST">
                                 @csrf
                                 @method('DELETE')

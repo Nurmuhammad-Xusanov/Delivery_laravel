@@ -43,7 +43,7 @@ class FoodsController extends Controller
         Foods::create([
             'title' => $request->title,
             'description' => $request->description,
-            'price' => number_format((float) $request->price, 3, '.', ''), 
+            'price' => number_format((float) $request->price, 3, '.', ''),
             'image' => $imageName,
         ]);
 
@@ -71,10 +71,32 @@ class FoodsController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Foods $food)
     {
-        //
+        $request->validate([
+            'title' => 'string|max:15',
+            'price' => 'numeric',
+            'image' => 'nullable|file|max:5120', // `nullable` qo'shildi
+        ]);
+
+        $imageName = $food->image;
+
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imageName = '/images/foods/' . time() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('images/foods'), $imageName);
+        }
+
+        $food->update([
+            'title' => $request->input('title', $food->title),
+            'description' => $request->input('description', $food->description),
+            'image' => $imageName,
+            'price' => $request->input('price', $food->price),
+        ]);
+
+        return redirect()->route('foods.index')->with('success', 'Food successfully updated!');
     }
+
 
     /**
      * Remove the specified resource from storage.

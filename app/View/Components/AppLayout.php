@@ -4,6 +4,7 @@ namespace App\View\Components;
 
 use Illuminate\View\Component;
 use Illuminate\View\View;
+use Spatie\Permission\Models\Role;
 
 class AppLayout extends Component
 {
@@ -12,6 +13,7 @@ class AppLayout extends Component
      */
     public function render(): View
     {
-        return view('layouts.app');
+        $roles = Role::all();
+        return view('layouts.app', compact('roles'));
     }
 }

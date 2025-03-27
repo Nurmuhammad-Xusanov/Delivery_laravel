@@ -18,12 +18,12 @@ class HasRole
     {
         // user auth check
         if (!Auth::check()) {
-            abort(404, 'Page does not exist');
+            abort(404); // 404|NOT FOUND
         }
 
         // check HasRole
         if(Auth::user()->roles->isEmpty()) {
-            abort(404, 'Page does not exist');
+            abort(404);
         }
         return $next($request);
     }

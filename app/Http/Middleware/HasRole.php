@@ -1,0 +1,30 @@
+<?php
+
+namespace App\Http\Middleware;
+
+use Closure;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Symfony\Component\HttpFoundation\Response;
+
+class HasRole
+{
+    /**
+     * Handle an incoming request.
+     *
+     * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
+     */
+    public function handle(Request $request, Closure $next): Response
+    {
+        // user auth check
+        if (!Auth::check()) {
+            abort(404, 'Page does not exist');
+        }
+
+        // check HasRole
+        if(Auth::user()->roles->isEmpty()) {
+            abort(404, 'Page does not exist');
+        }
+        return $next($request);
+    }
+}

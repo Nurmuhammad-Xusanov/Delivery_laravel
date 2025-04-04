@@ -15,7 +15,7 @@ Route::get('/dashboard', function () {
 
 Route::prefix('admin')->middleware(['hasrole'])->group(function () {
     Route::get('/dashboard', [AdminDashboard::class, 'index'])->name('admin.dashboard');
-    Route::resource('users', GetAllUsers::class);
+    Route::resource('users', GetAllUsers::class)->middleware(['role:admin']);
 });
 
 Route::middleware('auth')->group(function () {

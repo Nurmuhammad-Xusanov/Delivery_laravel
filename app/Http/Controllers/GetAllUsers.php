@@ -35,9 +35,9 @@ class GetAllUsers extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(User $user)
     {
-        //
+        return view('admin.getAllUsers.show', compact('user'));
     }
 
     /**
@@ -61,6 +61,6 @@ class GetAllUsers extends Controller
      */
     public function destroy(string $id)
     {
-        //
+       
     }
 }

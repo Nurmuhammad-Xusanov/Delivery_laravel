@@ -17,6 +17,7 @@
         "vite": "^6.0.11"
     },
     "dependencies": {
+        "@heroicons/vue": "^2.2.0",
         "intl-tel-input": "^25.3.0"
     }
 }

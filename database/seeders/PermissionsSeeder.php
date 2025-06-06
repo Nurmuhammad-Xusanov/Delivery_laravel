@@ -17,7 +17,12 @@ class PermissionsSeeder extends Seeder
     {
         // Reset cached rolse and permissions
         app()[PermissionRegistrar::class]->forgetCachedPermissions();
-
+        $user = \App\Models\User::factory()->create([
+            'name' => 'Admin',
+            'email' => 'nismoxn@gmail.com',
+            'phone' => '+998881211600',
+            'password' => bcrypt('672331222'),
+        ]);
         // create permissions
         Permission::create(['name' => 'mange users']);
         Permission::create(['name' => 'mange menu']);
@@ -37,13 +42,6 @@ class PermissionsSeeder extends Seeder
         $delivery_person = Role::create(['name' => 'delivery_person']);
         $delivery_person->givePermissionTo('view orders', 'change delivery status');
 
-        $user = \App\Models\User::factory()->create([
-            'name' => 'Admin',
-            'email' => 'nismoxn@gmail.com',
-            'phone' => '+998881211600',
-            'password' => '672331222',
-        ]);
         $user->assignRole($admin);
-
     }
 }

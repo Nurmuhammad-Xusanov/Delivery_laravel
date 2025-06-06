@@ -8,8 +8,12 @@
     "require": {
         "php": "^8.2",
         "blade-ui-kit/blade-icons": "^1.8",
+        "http-interop/http-factory-guzzle": "^1.2",
         "laravel/framework": "^11.31",
+        "laravel/scout": "^10.15",
         "laravel/tinker": "^2.9",
+        "meilisearch/meilisearch-php": "^1.14",
+        "predis/predis": "^2.3",
         "propaganistas/laravel-phone": "^5.3",
         "spatie/laravel-permission": "^6.16",
         "victorybiz/laravel-tel-input": "^1.6"
@@ -19,7 +23,7 @@
         "laravel/breeze": "^2.3",
         "laravel/pail": "^1.1",
         "laravel/pint": "^1.13",
-        "laravel/sail": "^1.26",
+        "laravel/sail": "^1.43",
         "mockery/mockery": "^1.6",
         "nunomaduro/collision": "^8.1",
         "phpunit/phpunit": "^11.0.1"
